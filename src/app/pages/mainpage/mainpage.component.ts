@@ -14,11 +14,14 @@ export class MainpageComponent implements OnInit {
 users;
 lotteries;
 q=1;
-p=1;weekLotteries;
+p=1;
+weekLotteries;
 winner;
+weekWinner;
   ngOnInit() {
     this.getLotteries();
     this.getUsers();
+    this.getCurrentWeekWinner();
   }
 getUsers(){
   this.api.getUsers().pipe(map(list=>list.map(item=>{
@@ -68,7 +71,7 @@ console.log(today);
 chooseWinner(){
   var ran = this.weekLotteries[Math.floor(Math.random() * this.weekLotteries.length)];
   console.log(ran);
-  this.api.getUser(ran.userId).subscribe(resp=>{
+  this.api.getUser(ran.userId).pipe(first()).toPromise().then(resp=>{
     this.winner=resp;
     let data={
 name:this.winner.name,
@@ -77,7 +80,7 @@ id:ran.userId,
 phoneNumber:this.winner.phoneNumber,
 points:this.winner.points,
 winTime:this.winner.win+1,
-data: Date.now()
+date: Date.now()
     }
     this.api.addWinner(data).then(res=>{
 let user={
@@ -125,5 +128,32 @@ if(a.length==0){
 }
   })
 }
+getCurrentWeekWinner(){
+  this.api.getWinners().pipe(map(list=>list.map(item=>{
+    let data =item.payload.doc.data();
+    let id =item.payload.doc.id;
+    return{id,...data}
+  }))).subscribe((res:any)=>{
+    var curr = new Date;
+  console.log(curr.getDate());
+  console.log(curr.getDay());
+  curr.setUTCHours(0,0,0,0)
+  var first = (curr.getDate() - curr.getDay())+4; // First day is the day of the month - the day of the week
+var last = first + 7; // last day is the first day + 6
 
+var firstday = new Date(curr.setDate(first));
+var lastday = new Date(curr.setDate(last));
+console.log(firstday);
+console.log(lastday);
+let a=res.filter(item=>{
+  var dummy=new Date(item.date)
+  console.log(dummy);
+
+return dummy>=firstday && dummy< lastday
+})
+console.log(a);
+this.weekWinner=a;
+
+})
+}
 }
