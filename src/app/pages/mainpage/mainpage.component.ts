@@ -152,7 +152,7 @@ let a=res.filter(item=>{
 return dummy>=firstday && dummy< lastday
 })
 console.log(a);
-this.weekWinner=a;
+this.weekWinner=a[0];
 
 })
 }
