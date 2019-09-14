@@ -76,8 +76,22 @@ email:this.winner.email,
 id:ran.userId,
 phoneNumber:this.winner.phoneNumber,
 points:this.winner.points,
-winTime:this.winner.win+1
+winTime:this.winner.win+1,
+data: Date.now()
     }
+    this.api.addWinner(data).then(res=>{
+let user={
+  win:this.winner.win+1
+}
+this.api.updateUser(ran.userId,user).then(resp=>{
+  console.log("user Updated");
+}).catch(err=>{
+  console.log(err);
+})
+    }).catch(err=>{
+      console.log(err);
+    })
+
     console.log(this.winner);
   })
 }
@@ -107,7 +121,7 @@ return dummy>=firstday && dummy< lastday
 if(a.length==0){
   this.chooseWinner();
 }else{
-  console.log("winner is already Descides");
+  console.log("winner is already Declared");
 }
   })
 }
