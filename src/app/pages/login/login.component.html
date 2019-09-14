@@ -1,0 +1,76 @@
+<header class="navbar navbar-default navbar-fixed-top">
+  <!-- Header Brand -->
+  <a routerLink="/login" class="navbar-brand">
+      <!-- <img src="../../../assets/img/template/drop.png" alt="FreshUI"> -->
+      <i class="fa fa-plane " ></i>
+      <span style="font-size: 15px !important">Softex</span>
+  </a>
+  <!-- END Header Brand -->
+</header>
+<!-- END Header -->
+
+<!-- Login Container -->
+<div id="login-container">
+  <!-- Page Content -->
+  <div id="page-content" class="block remove-margin">
+      <!-- Login Title -->
+      <div class="block-header">
+          <div class="header-section">
+              <h1 class="text-center">Welcome to Softex Dashboard<br><small>Please Login </small></h1>
+          </div>
+      </div>
+      <!-- END Login Title -->
+
+      <!-- Login Form -->
+      <form  id="form-login" class="form-horizontal">
+          <div class="form-group">
+              <!-- Social Login -->
+              <!-- <div class="col-xs-6">
+                  <a href="javascript:void(0)" class="btn btn-lg btn-info btn-block"><i class="fa fa-facebook"></i> Facebook</a>
+              </div> -->
+              <!-- <div class="col-xs-6">
+                  <a href="javascript:void(0)" class="btn btn-lg btn-info btn-block"><i class="fa fa-twitter"></i> Twitter</a>
+              </div> -->
+              <!-- END Social Login -->
+          </div>
+          <div class="form-group">
+              <div class="col-xs-12">
+                  <input type="text" id="login-email" name="login-email" [(ngModel)]="email" class="form-control input-lg" placeholder="Email">
+              </div>
+          </div>
+          <div class="form-group">
+              <div class="col-xs-12">
+                  <input type="password" id="login-password" name="login-password" [(ngModel)]="password" class="form-control input-lg" placeholder="Password">
+
+                  <!--
+                  Hidden checkbox. Its checked property will be toggled every time the remember me (#btn-remember) button is clicked (js code at the bottom)
+                  You can add the checked property by default (the button will be enabled automatically)
+                  -->
+                  <!-- <input type="checkbox" id="login-remember" name="login-remember" hidden> -->
+              </div>
+          </div>
+          <div class="form-group">
+              <div class="col-xs-8">
+                  <!-- <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-default disabled">Remember me?</button>
+                      <button type="button" class="btn btn-sm btn-default" data-toggle="button" id="btn-remember"><i class="fa fa-check"></i></button>
+                  </div> -->
+              </div>
+              <div class="col-xs-4 text-right">
+                  <button  type="submit" class="btn btn-sm btn-primary" (click)="login()"><i class="fa fa-angle-right"></i> Login</button>
+              </div>
+          </div>
+
+      </form>
+      <!-- END Login Form -->
+
+      <!-- Register Form -->
+
+      <!-- END Register Form -->
+
+      <!-- Modal Terms -->
+
+      <!-- END Modal Terms -->
+  </div>
+  <!-- END Page Content -->
+</div>

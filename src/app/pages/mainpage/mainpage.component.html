@@ -1,0 +1,210 @@
+<div id="fx-container" class="fx-opacity">
+  <div id="page-content" class="block">
+    <div class="block-header">
+      <div class="row remove-margin">
+        <!-- Title -->
+        <div class="col-md-4">
+          <!-- If you do not want a link in the header, instead of .header-title-link you can use a div with the class .header-section -->
+          <a class="header-title-link">
+            <h1><i class="fa fa-plane " aria-hidden="true"></i>Softex Dashboard<br><small>Welcome Admin!</small></h1>
+          </a>
+        </div>
+        <!-- END Title -->
+
+        <!-- Statistics -->
+        <div class="col-md-8">
+          <!-- Outer Grid -->
+          <div class="row">
+            <div class="col-sm-12">
+              <!-- Inner Grid 1 -->
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <a class="header-link">
+                    <h1 class="animation-pullDown">
+                      <strong *ngIf="users">{{users.length}}</strong><br><small>Total Users</small>
+                    </h1>
+                  </a>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <a class="header-link">
+                    <h1 class="animation-pullDown">
+                      <strong *ngIf="lotteries">{{lotteries.length}}</strong><br><small>Total Lotteries</small>
+                    </h1>
+                  </a>
+                </div>
+                <!-- <div class="col-xs-12 col-md-4">
+                  <a class="header-link">
+                    <h1 class="animation-pullDown">
+                      <strong>{{products.length}}</strong><br><small>Total Products</small>
+                    </h1>
+                  </a>
+                </div> -->
+              </div>
+              <!-- END Inner Grid 1 -->
+            </div>
+          </div>
+          <!-- END Outer Grid  -->
+        </div>
+        <!-- END Statistics -->
+      </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+      <li><i class="fa fa-coffee"></i></li>
+      <li><a>Dashboard</a></li>
+    </ul>
+
+    <div class="block full">
+      <!-- Author Title -->
+      <div class="block-title" style="text-align: center !important">
+          <h2>Winner Of the Week</h2>
+      </div>
+      <!-- END Author Title -->
+
+      <!-- Author Content -->
+      <div class="content-text clearfix">
+          <!-- <img src="img/template/avatar2.jpg" alt="avatar" class="img-circle pull-left"> -->
+          <h5><a href="page_special_user_profile.html" class="label label-primary">John Doe</a></h5>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus.
+      </div>
+      <!-- END Author Content -->
+  </div>
+
+
+    <div class="row" style=" margin-bottom: 15px !important">
+      <div class="col-12" style="text-align: right !important;">
+        <div class="col-md-3 col-sm-3 col-3">
+
+          <button routerLink="/queries" type="button" class="btn btn-block btn-primary">Manage Quieries </button>
+        </div>
+        <div class="col-md-3 col-sm-9 col-3">
+
+          <button routerLink="/orders" type="button" class="btn btn-block btn-primary">Manage Orders </button>
+        </div>
+        <div class="col-md-3 col-sm-3 col-3">
+
+            <button routerLink="/add-product" type="button" class="btn btn-block btn-primary">Add New Product </button>
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-3">
+          <button routerLink="/add-game" type="button" class="btn btn-block btn-primary">Add New Game </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row gutter30">
+        <div class="col-md-12">
+          <!-- Search Block -->
+          <div class="block full">
+            <div class="block-title">
+
+              <h2><i class="fa fa-user"></i> Users</h2>
+            </div>
+            <div class="table-responsive">
+              <table id="example-datatable" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th class="text-center">#</th>
+                    <th>Name</th>
+
+
+                    <th class="text-center">Email</th>
+                    <th class="text-center">country</th>
+                    <th class="text-center">Phone Number</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+*ngFor="let item of users | paginate: {id:'games', itemsPerPage: 10, currentPage: q}  ;let i=index "
+                    >
+                    <td class="text-center">{{i+1}}</td>
+
+                    <td class="text-center">
+                   {{item.name}}
+                    </td>
+
+                    <td class="text-center">
+                   {{item.email}}
+                    </td>
+                    <td class="text-center">
+                      {{item.country}}
+                                       </td>
+                    <td class="text-center">
+ +{{item.phoneNumber}}
+                  </td>
+                  </tr>
+
+
+                </tbody>
+
+              </table>
+
+            </div>
+            <pagination-controls id="games" (pageChange)="q = $event"></pagination-controls>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="row gutter30">
+        <div class="col-md-12">
+          <!-- Search Block -->
+          <div class="block full">
+            <div class="block-title">
+
+              <h2><i class="fa fa-user"></i> Lotteries</h2>
+            </div>
+            <div class="table-responsive">
+              <table id="example-datatable" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th class="text-center">#</th>
+                    <th>Date</th>
+
+
+                    <th class="text-center">Image</th>
+                    <th class="text-center">Number</th>
+                    <th class="text-center">User Id</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+*ngFor="let item of lotteries | paginate: {id:'lottery', itemsPerPage: 10, currentPage: p}  ;let i=index "
+                    >
+                    <td class="text-center">{{i+1}}</td>
+
+                    <td class="text-center">
+                   {{item.date | date}}
+                    </td>
+
+                    <td class="text-center">
+                      <div class="btn-group">
+                        <img [src]="item.lotteryImage" style="height: 30px;border-radius: 50px">
+                         </div>
+                    </td>
+                    <td class="text-center">
+                      {{item.lotteryNo}}
+                                       </td>
+                    <td class="text-center">
+ +{{item.userId}}
+                  </td>
+                  </tr>
+
+
+                </tbody>
+
+              </table>
+
+            </div>
+            <pagination-controls id="lottery" (pageChange)="p = $event"></pagination-controls>
+          </div>
+
+        </div>
+
+      </div>
+
+  </div>
+</div>
