@@ -62,7 +62,7 @@ console.log(a);
 this.weekLotteries=a;
 let now= new Date
 let today=now.getDay();
-if(today==6){
+if(today==4){
   this.getWinners();
 }
 console.log(today);
@@ -108,7 +108,7 @@ getWinners(){
   console.log(curr.getDate());
   console.log(curr.getDay());
   curr.setUTCHours(0,0,0,0)
-  var first = (curr.getDate() - curr.getDay())+4; // First day is the day of the month - the day of the week
+  var first = (curr.getDate() - curr.getDay())-3; // First day is the day of the month - the day of the week
 var last = first + 7; // last day is the first day + 6
 
 var firstday = new Date(curr.setDate(first));
@@ -134,11 +134,12 @@ getCurrentWeekWinner(){
     let id =item.payload.doc.id;
     return{id,...data}
   }))).subscribe((res:any)=>{
+    console.log(res);
     var curr = new Date;
   console.log(curr.getDate());
   console.log(curr.getDay());
   curr.setUTCHours(0,0,0,0)
-  var first = (curr.getDate() - curr.getDay())+4; // First day is the day of the month - the day of the week
+  var first = (curr.getDate() - curr.getDay())-3; // First day is the day of the month - the day of the week
 var last = first + 7; // last day is the first day + 6
 
 var firstday = new Date(curr.setDate(first));
