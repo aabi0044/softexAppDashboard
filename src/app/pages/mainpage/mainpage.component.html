@@ -205,6 +205,60 @@
         </div>
 
       </div>
+      <div class="row gutter30">
+        <div class="col-md-12">
+          <!-- Search Block -->
+          <div class="block full">
+            <div class="block-title">
 
+              <h2><i class="fa fa-user"></i> Winners List</h2>
+            </div>
+            <div class="table-responsive">
+              <table id="example-datatable" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th class="text-center">#</th>
+                    <th>Date</th>
+
+
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Phone Number</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+*ngFor="let item of allwinners | paginate: {id:'winners', itemsPerPage: 10, currentPage: r}  ;let i=index "
+                    >
+                    <td class="text-center">{{i+1}}</td>
+
+                    <td class="text-center">
+                   {{item.date | date}}
+                    </td>
+
+                    <td class="text-center">
+                   {{item.name}}
+                    </td>
+                    <td class="text-center">
+                      {{item.email}}
+                                       </td>
+                    <td class="text-center">
+ +{{item.phoneNumber}}
+                  </td>
+                  </tr>
+
+
+                </tbody>
+
+              </table>
+
+            </div>
+            <pagination-controls id="winners" (pageChange)="r = $event"></pagination-controls>
+          </div>
+
+        </div>
+
+      </div>
   </div>
 </div>

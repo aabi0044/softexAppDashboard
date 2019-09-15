@@ -15,13 +15,16 @@ users;
 lotteries;
 q=1;
 p=1;
+r=1;
 weekLotteries;
 winner;
 weekWinner;
+allwinners;
   ngOnInit() {
     this.getLotteries();
     this.getUsers();
     this.getCurrentWeekWinner();
+    this.getAllWinners();
   }
 getUsers(){
   this.api.getUsers().pipe(map(list=>list.map(item=>{
@@ -156,5 +159,15 @@ console.log(a);
 this.weekWinner=a[0];
 
 })
+}
+getAllWinners(){
+  this.api.getWinners().pipe(map(list=>list.map(item=>{
+    let data =item.payload.doc.data();
+    let id =item.payload.doc.id;
+    return{id,...data}
+  }))).subscribe((res:any)=>{
+this.allwinners=res;
+
+  })
 }
 }
