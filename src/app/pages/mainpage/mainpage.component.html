@@ -52,264 +52,349 @@
       <li><i class="fa fa-coffee"></i></li>
       <li><a>Dashboard</a></li>
     </ul>
-
-    <div class="block full" *ngIf="weekWinner">
+    <div class="block full" *ngIf="showSelectionForLotteries" >
       <!-- Author Title -->
       <div class="block-title" style="text-align: center !important">
-          <h2> <i class="fa fa-star " aria-hidden="true"></i> Winner of the week</h2>
+        <h2> <i class="fa fa-cog " aria-hidden="true"></i> Chose Winners</h2>
+      </div>
+
+      <div class="content-text clearfix" style="text-align: center">
+        <div class="form-group">
+          <label class="col-md-2 control-label" for="example-select">How many winners this week ?</label>
+          <div class="col-md-2">
+              <select id="example-select" name="example-select" [(ngModel)]="winnerValue" class="form-control" size="1">
+
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+              </select>
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-primary" (click)="chooseWinner()">Generate Winners</button>
+          </div>
+          <div class="less_lotteries" *ngIf="choseLess">
+
+
+          <div class="col-md-6" >
+            <span style="color: red;">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+              You are selecting more than registered Lotteries
+            </span>
+            <div>
+              <span style="color:skyblue;">
+                  <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+            Kindly chose less value
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="No_lotteries" *ngIf="noLotteries">
+
+
+            <div class="col-md-6">
+              <span style="color: red;">
+                  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+               There is no lotteries for this week.
+              </span>
+
+            </div>
+          </div>
+
+          <div class="no_selection" *ngIf="!selectedValue">
+
+
+              <div class="col-md-6">
+                <span style="color: red;">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                 Kindly select some value.
+                </span>
+
+              </div>
+            </div>
+
+
+      </div>
+        <!-- <h5><a class="label label-primary"><i class="fa fa-warning " aria-hidden="true"></i> Currently there is no
+            winner in this week</a></h5> -->
+
+
+
+      </div>
+
+    </div>
+    <div class="row gutter30" *ngIf="!noWinner">
+      <div class="col-md-12">
+        <!-- Search Block -->
+        <div class="block full">
+          <div class="block-title" style="text-align: center;">
+
+            <h2><i class="fa fa-star"></i>Last Week Winners List</h2>
+          </div>
+          <div class="table-responsive">
+            <table id="example-datatable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th>Date</th>
+
+
+                  <th class="text-center">Name</th>
+                  <th class="text-center">Email</th>
+                  <th class="text-center">Phone Number</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of weekWinner | paginate: {id:'winners', itemsPerPage: 10, currentPage: r}  ;let i=index ">
+                  <td class="text-center">{{i+1}}</td>
+
+                  <td class="text-center">
+                    {{item.date | date}}
+                  </td>
+
+                  <td class="text-center">
+                    {{item.name}}
+                  </td>
+                  <td class="text-center">
+                    {{item.email}}
+                  </td>
+                  <td class="text-center">
+                    +{{item.phoneNumber}}
+                  </td>
+                </tr>
+
+
+              </tbody>
+
+            </table>
+
+          </div>
+          <pagination-controls id="winners" (pageChange)="r = $event"></pagination-controls>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="block full" *ngIf="winnersDescided">
+        <!-- Author Title -->
+        <div class="block-title" style="text-align: center !important">
+          <h2> <i class="fa fa-star " aria-hidden="true"></i> Chose Winner</h2>
+        </div>
+        <!-- END Author Title -->
+
+        <!-- Author Content -->
+        <div class="content-text clearfix" style="text-align: center">
+          <!-- <img src="img/template/avatar2.jpg" alt="avatar" class="img-circle pull-left"> -->
+          <h5><a class="label label-primary"><i class="fa fa-warning " aria-hidden="true"></i>
+          winners are decided and are in the list of the week winners
+          </a></h5>
+
+
+          <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. -->
+        </div>
+
+      </div>
+    <div class="block full" *ngIf="noWinner">
+      <!-- Author Title -->
+      <div class="block-title" style="text-align: center !important">
+        <h2> <i class="fa fa-star " aria-hidden="true"></i> Winner of the week</h2>
       </div>
       <!-- END Author Title -->
 
       <!-- Author Content -->
-      <div class="content-text clearfix">
-          <!-- <img src="img/template/avatar2.jpg" alt="avatar" class="img-circle pull-left"> -->
-          <h5><a  class="label label-primary"><i class="fa fa-user " aria-hidden="true"></i> {{weekWinner.name | uppercase}}</a></h5>
-<div style="border: 1px solid ">
-          <div class="row"style="padding:5px">
-  <div class='col-xs-12 col-md-6'>
-    <span style="font-size: medium;
-    font-weight: bold;
-    padding: 5px;">Phone Number</span>
-  </div>
-  <div class='col-xs-12 col-md-6'>
-{{weekWinner.phoneNumber}}
-  </div>
-</div>
-
-<div class="row" style="padding:5px">
-  <div class='col-xs-12 col-md-6'>
-    <span style="font-size: medium;
-    font-weight: bold;
-    padding: 5px;">Email</span>
-  </div>
-  <div class='col-xs-12 col-md-6'>
-{{weekWinner.email}}
-  </div>
-</div>
-<div class="row" style="padding:5px">
-  <div class='col-xs-12 col-md-6'>
-    <span style="font-size: medium;
-    font-weight: bold;
-    padding: 5px;">Date</span>
-  </div>
-  <div class='col-xs-12 col-md-6'>
-{{weekWinner.date | date}}
-  </div>
-</div>
-
-</div>
-
-          <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. -->
-      </div>
-      <!-- END Author Content -->
-  </div>
-  <div class="block full" *ngIf="!weekWinner">
-    <!-- Author Title -->
-    <div class="block-title" style="text-align: center !important">
-        <h2> <i class="fa fa-star " aria-hidden="true"></i> Winner of the week</h2>
-    </div>
-    <!-- END Author Title -->
-
-    <!-- Author Content -->
-    <div class="content-text clearfix" style="text-align: center">
+      <div class="content-text clearfix" style="text-align: center">
         <!-- <img src="img/template/avatar2.jpg" alt="avatar" class="img-circle pull-left"> -->
-        <h5><a  class="label label-primary"><i class="fa fa-warning " aria-hidden="true"></i> Currently there is no winner in this week</a></h5>
+        <h5><a class="label label-primary"><i class="fa fa-warning " aria-hidden="true"></i> Currently there is no
+            winner in this week</a></h5>
 
 
         <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. -->
-    </div>
-    <!-- END Author Content -->
-</div>
-
-    <!-- <div class="row" style=" margin-bottom: 15px !important">
-      <div class="col-12" style="text-align: right !important;">
-        <div class="col-md-3 col-sm-3 col-3">
-
-          <button routerLink="/queries" type="button" class="btn btn-block btn-primary">Manage Quieries </button>
-        </div>
-        <div class="col-md-3 col-sm-9 col-3">
-
-          <button routerLink="/orders" type="button" class="btn btn-block btn-primary">Manage Orders </button>
-        </div>
-        <div class="col-md-3 col-sm-3 col-3">
-
-            <button routerLink="/add-product" type="button" class="btn btn-block btn-primary">Add New Product </button>
-        </div>
-
-        <div class="col-md-3 col-sm-3 col-3">
-          <button routerLink="/add-game" type="button" class="btn btn-block btn-primary">Add New Game </button>
-        </div>
       </div>
-    </div> -->
+
+    </div>
+
+
 
     <div class="row gutter30">
-        <div class="col-md-12">
-          <!-- Search Block -->
-          <div class="block full">
-            <div class="block-title">
+      <div class="col-md-12">
+        <!-- Search Block -->
+        <div class="block full">
+          <div class="block-title">
 
-              <h2><i class="fa fa-user"></i> Users</h2>
-            </div>
-            <div class="table-responsive">
-              <table id="example-datatable" class="table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th class="text-center">#</th>
-                    <th>Name</th>
-
-
-                    <th class="text-center">Email</th>
-                    <th class="text-center">country</th>
-                    <th class="text-center">Phone Number</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-*ngFor="let item of users | paginate: {id:'games', itemsPerPage: 10, currentPage: q}  ;let i=index "
-                    >
-                    <td class="text-center">{{i+1}}</td>
-
-                    <td class="text-center">
-                   {{item.name}}
-                    </td>
-
-                    <td class="text-center">
-                   {{item.email}}
-                    </td>
-                    <td class="text-center">
-                      {{item.country}}
-                                       </td>
-                    <td class="text-center">
- +{{item.phoneNumber}}
-                  </td>
-                  </tr>
-
-
-                </tbody>
-
-              </table>
-
-            </div>
-            <pagination-controls id="games" (pageChange)="q = $event"></pagination-controls>
+            <h2><i class="fa fa-user"></i> Users</h2>
           </div>
+          <div class="table-responsive">
+            <table id="example-datatable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th>Name</th>
 
+
+                  <th class="text-center">Email</th>
+                  <th class="text-center">country</th>
+                  <th class="text-center">Phone Number</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of users | paginate: {id:'games', itemsPerPage: 10, currentPage: q}  ;let i=index ">
+                  <td class="text-center">{{i+1}}</td>
+
+                  <td class="text-center">
+                    {{item.name}}
+                  </td>
+
+                  <td class="text-center">
+                    {{item.email}}
+                  </td>
+                  <td class="text-center">
+                    {{item.country}}
+                  </td>
+                  <td class="text-center">
+                    +{{item.phoneNumber}}
+                  </td>
+                </tr>
+
+
+              </tbody>
+
+            </table>
+
+          </div>
+          <pagination-controls id="games" (pageChange)="q = $event"></pagination-controls>
         </div>
 
       </div>
 
-
-      <div class="row gutter30">
-        <div class="col-md-12">
-          <!-- Search Block -->
-          <div class="block full">
-            <div class="block-title">
-
-              <h2><i class="fa fa-user"></i> Lotteries</h2>
-            </div>
-            <div class="table-responsive">
-              <table id="example-datatable" class="table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th class="text-center">#</th>
-                    <th>Date</th>
+    </div>
 
 
-                    <th class="text-center">Image</th>
-                    <th class="text-center">Number</th>
-                    <th class="text-center">User Id</th>
+    <div class="row gutter30">
+      <div class="col-md-12">
+        <!-- Search Block -->
+        <div class="block full">
+          <div class="block-title">
 
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-*ngFor="let item of lotteries | paginate: {id:'lottery', itemsPerPage: 10, currentPage: p}  ;let i=index "
-                    >
-                    <td class="text-center">{{i+1}}</td>
-
-                    <td class="text-center">
-                   {{item.date | date}}
-                    </td>
-
-                    <td class="text-center">
-                      <div class="btn-group">
-                        <img [src]="item.lotteryImage" style="height: 30px;border-radius: 50px">
-                         </div>
-                    </td>
-                    <td class="text-center">
-                      {{item.lotteryNo}}
-                                       </td>
-                    <td class="text-center">
- +{{item.userId}}
-                  </td>
-                  </tr>
-
-
-                </tbody>
-
-              </table>
-
-            </div>
-            <pagination-controls id="lottery" (pageChange)="p = $event"></pagination-controls>
+            <h2><i class="fa fa-user"></i> Lotteries</h2>
           </div>
+          <div class="table-responsive">
+            <table id="example-datatable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th>Date</th>
 
+
+                  <th class="text-center">Image</th>
+                  <th class="text-center">Number</th>
+                  <th class="text-center">User Id</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of lotteries | paginate: {id:'lottery', itemsPerPage: 10, currentPage: p}  ;let i=index ">
+                  <td class="text-center">{{i+1}}</td>
+
+                  <td class="text-center">
+                    {{item.date | date}}
+                  </td>
+
+                  <td class="text-center">
+                    <div class="btn-group">
+                      <img [src]="item.lotteryImage" style="height: 30px;border-radius: 50px">
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    {{item.lotteryNo}}
+                  </td>
+                  <td class="text-center">
+                    +{{item.userId}}
+                  </td>
+                </tr>
+
+
+              </tbody>
+
+            </table>
+
+          </div>
+          <pagination-controls id="lottery" (pageChange)="p = $event"></pagination-controls>
         </div>
 
       </div>
-      <div class="row gutter30">
-        <div class="col-md-12">
-          <!-- Search Block -->
-          <div class="block full">
-            <div class="block-title">
 
-              <h2><i class="fa fa-user"></i> Winners List</h2>
-            </div>
-            <div class="table-responsive">
-              <table id="example-datatable" class="table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th class="text-center">#</th>
-                    <th>Date</th>
+    </div>
+    <div class="row gutter30">
+      <div class="col-md-12">
+        <!-- Search Block -->
+        <div class="block full">
+          <div class="block-title">
 
-
-                    <th class="text-center">Name</th>
-                    <th class="text-center">Email</th>
-                    <th class="text-center">Phone Number</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-*ngFor="let item of allwinners | paginate: {id:'winners', itemsPerPage: 10, currentPage: r}  ;let i=index "
-                    >
-                    <td class="text-center">{{i+1}}</td>
-
-                    <td class="text-center">
-                   {{item.date | date}}
-                    </td>
-
-                    <td class="text-center">
-                   {{item.name}}
-                    </td>
-                    <td class="text-center">
-                      {{item.email}}
-                                       </td>
-                    <td class="text-center">
- +{{item.phoneNumber}}
-                  </td>
-                  </tr>
-
-
-                </tbody>
-
-              </table>
-
-            </div>
-            <pagination-controls id="winners" (pageChange)="r = $event"></pagination-controls>
+            <h2><i class="fa fa-user"></i> Winners List</h2>
           </div>
+          <div class="table-responsive">
+            <table id="example-datatable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th>Date</th>
 
+
+                  <th class="text-center">Name</th>
+                  <th class="text-center">Email</th>
+                  <th class="text-center">Phone Number</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of allwinners | paginate: {id:'winners', itemsPerPage: 10, currentPage: r}  ;let i=index ">
+                  <td class="text-center">{{i+1}}</td>
+
+                  <td class="text-center">
+                    {{item.date | date}}
+                  </td>
+
+                  <td class="text-center">
+                    {{item.name}}
+                  </td>
+                  <td class="text-center">
+                    {{item.email}}
+                  </td>
+                  <td class="text-center">
+                    +{{item.phoneNumber}}
+                  </td>
+                </tr>
+
+
+              </tbody>
+
+            </table>
+
+          </div>
+          <pagination-controls id="winners" (pageChange)="r = $event"></pagination-controls>
         </div>
 
       </div>
+
+    </div>
   </div>
 </div>
